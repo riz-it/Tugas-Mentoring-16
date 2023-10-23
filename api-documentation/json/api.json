@@ -1,535 +1,529 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "title": "Tugas Mentoring 16 - API Documentation",
-      "description": "API ini memberikan panduan tentang cara mengelola produk dalam konteks tugas mentoring ke-15. Panduan ini membantu pengguna untuk memahami langkah-langkah dasar dalam mengelola produk, termasuk penambahan, pengeditan, dan penghapusan produk. Pengguna akan mempelajari cara menggunakan endpoint, parameter, dan respons yang diperlukan untuk mengelola produk dengan efisien. API ini juga menyediakan contoh penggunaan sebagai panduan awal. Disarankan untuk memiliki pemahaman dasar tentang pengelolaan produk dan dapat merujuk ke dokumentasi resmi atau menghubungi Mochamad Rizal di mrizalf.email@gmail.com untuk informasi lebih lanjut.",
-      "version": "1.0.0"
+  "swagger": "2.0",
+  "info": {
+    "title": "Tugas Mentoring 16 - API Documentation",
+    "description": "API ini memberikan panduan tentang cara mengelola produk dalam konteks tugas mentoring ke-15. Panduan ini membantu pengguna untuk memahami langkah-langkah dasar dalam mengelola produk, termasuk penambahan, pengeditan, dan penghapusan produk. Pengguna akan mempelajari cara menggunakan endpoint, parameter, dan respons yang diperlukan untuk mengelola produk dengan efisien. API ini juga menyediakan contoh penggunaan sebagai panduan awal. Disarankan untuk memiliki pemahaman dasar tentang pengelolaan produk dan dapat merujuk ke dokumentasi resmi atau menghubungi Mochamad Rizal di mrizalf.email@gmail.com untuk informasi lebih lanjut.",
+    "version": "1.0.0"
+  },
+  "host": "rizal.doxxa.my.id",
+  "basePath": "/api/v1",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "untuk melakukan otentikasi dan mendapatkan token."
     },
-    "host": "rizal.doxxa.my.id",
-    "basePath": "/api/v1",
-    "schemes": [
-      "https",
-      "http"
-    ],
-    "securityDefinitions": {
-      "Bearer": {
-        "type": "apiKey",
-        "name": "Authorization",
-        "in": "header"
-      }
+    {
+      "name": "Categories",
+      "description": "untuk mengelola semua kategori produk."
     },
-    "tags": [
-      {
-        "name": "Auth",
-        "description": "untuk melakukan otentikasi dan mendapatkan token."
-      },
-      {
-        "name": "Categories",
-        "description": "untuk mengelola semua kategori produk."
-      },
-      {
-        "name": "Products",
-        "description": "untuk mengelola semua produk."
-      }
-    ],
-    "paths": {
-      "/auth/register": {
-        "post": {
-          "tags": [
-            "Auth"
-          ],
-          "summary": "Register user",
-          "consumes": [
-            "application/x-www-form-urlencoded"
-          ],
-          "responses": {
-            "200": {
-              "description": "successful operation"
-            },
-            "400": {
-              "description": "bad request"
-            }
+    {
+      "name": "Products",
+      "description": "untuk mengelola semua produk."
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Register user",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
           },
-          "parameters": [
-            {
-              "in": "formData",
-              "name": "username",
-              "type": "string",
-              "required": true
-            },
-            {
-              "in": "formData",
-              "name": "email",
-              "type": "string",
-              "required": true
-            },
-            {
-              "in": "formData",
-              "name": "password",
-              "type": "string",
-              "required": true
-            }
-          ]
-        }
-      },
-      "/auth/login": {
-        "post": {
-          "tags": [
-            "Auth"
-          ],
-          "summary": "Login user",
-          "consumes": [
-            "application/x-www-form-urlencoded"
-          ],
-          "responses": {
-            "200": {
-              "description": "successful operation"
-            }
-          },
-          "parameters": [
-            {
-              "in": "formData",
-              "name": "username",
-              "type": "string",
-              "required": true
-            },
-            {
-              "in": "formData",
-              "name": "password",
-              "type": "string",
-              "required": true
-            }
-          ]
-        }
-      },
-      "/auth/reGenToken": {
-        "post": {
-          "tags": [
-            "Auth"
-          ],
-          "summary": "Re Generate user token",
-          "consumes": [
-            "application/x-www-form-urlencoded"
-          ],
-          "responses": {
-            "200": {
-              "description": "successful operation"
-            },
-            "400": {
-              "description": "bad request"
-            }
-          },
-          "parameters": [
-            {
-              "in": "formData",
-              "name": "username",
-              "type": "string",
-              "required": true
-            }
-          ]
-        }
-      },
-      "/auth/logout": {
-        "post": {
-          "tags": [
-            "Auth"
-          ],
-          "summary": "Logout user",
-          "consumes": [
-            "application/x-www-form-urlencoded"
-          ],
-          "responses": {
-            "200": {
-              "description": "successful operation"
-            },
-            "400": {
-              "description": "bad request"
-            }
-          },
-          "parameters": [
-            {
-              "in": "formData",
-              "name": "username",
-              "type": "string",
-              "required": true
-            },
-            {
-              "in": "formData",
-              "name": "password",
-              "type": "string",
-              "required": true
-            }
-          ]
-        }
-      },
-      "/categories": {
-        "get": {
-          "tags": [
-            "Categories"
-          ],
-          "summary": "Menampilkan semua kategori",
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "200": {
-              "description": "successful operation"
-            },
-            "404": {
-              "description": "category not found"
-            }
-          },
-          "security": [
-            {
-              "Bearer": []
-            }
-          ]
-        },
-        "post": {
-          "tags": [
-            "Categories"
-          ],
-          "summary": "Tambah kategori",
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "200": {
-              "description": "successful operation"
-            },
-            "400": {
-              "description": "bad request"
-            }
-          },
-          "parameters": [
-            {
-              "name": "req body",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/form_category"
-              }
-            }
-          ],
-          "security": [
-            {
-              "Bearer": []
-            }
-          ]
-        }
-      },
-      "/categories/{id}": {
-        "get": {
-          "tags": [
-            "Categories"
-          ],
-          "summary": "Menampilkan detail kategori",
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "200": {
-              "description": "successful operation"
-            },
-            "400": {
-              "description": "bad request"
-            },
-            "404": {
-              "description": "category not found"
-            }
-          },
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "description": "ID kategori",
-              "type": "integer"
-            }
-          ],
-          "security": [
-            {
-              "Bearer": []
-            }
-          ]
-        },
-        "put": {
-          "tags": [
-            "Categories"
-          ],
-          "summary": "Memperbarui kategori",
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "200": {
-              "description": "successful operation"
-            },
-            "400": {
-              "description": "bad request"
-            },
-            "404": {
-              "description": "category not found"
-            }
-          },
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "description": "ID kategori",
-              "type": "integer"
-            },
-            {
-              "name": "req body",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/form_category"
-              }
-            }
-          ],
-          "security": [
-            {
-              "Bearer": []
-            }
-          ]
-        },
-        "delete": {
-          "tags": [
-            "Categories"
-          ],
-          "summary": "Menghapus kategori",
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "200": {
-              "description": "successful operation"
-            },
-            "400": {
-              "description": "bad request"
-            },
-            "404": {
-              "description": "category not found"
-            }
-          },
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "description": "ID kategori",
-              "type": "integer"
-            }
-          ],
-          "security": [
-            {
-              "Bearer": []
-            }
-          ]
-        }
-      },
-      "/products": {
-        "get": {
-          "tags": [
-            "Products"
-          ],
-          "summary": "Menampilkan semua produk",
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "200": {
-              "description": "successful operation"
-            },
-            "404": {
-              "description": "product not found"
-            }
-          },
-          "security": [
-            {
-              "Bearer": []
-            }
-          ]
-        },
-        "post": {
-          "tags": [
-            "Products"
-          ],
-          "summary": "Tambah produk",
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "200": {
-              "description": "successful operation"
-            },
-            "400": {
-              "description": "bad request"
-            },
-            "404": {
-              "description": "product not found"
-            }
-          },
-          "parameters": [
-            {
-              "name": "req body",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/form_product"
-              }
-            }
-          ],
-          "security": [
-            {
-              "Bearer": []
-            }
-          ]
-        }
-      },
-      "/products/{id}": {
-        "get": {
-          "tags": [
-            "Products"
-          ],
-          "summary": "Menampilkan detail produk",
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "200": {
-              "description": "successful operation"
-            },
-            "400": {
-              "description": "bad request"
-            },
-            "404": {
-              "description": "product not found"
-            }
-          },
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "description": "ID produk",
-              "type": "integer"
-            }
-          ],
-          "security": [
-            {
-              "Bearer": []
-            }
-          ]
-        },
-        "put": {
-          "tags": [
-            "Products"
-          ],
-          "summary": "Memperbarui produk",
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "200": {
-              "description": "successful operation"
-            },
-            "400": {
-              "description": "bad request"
-            },
-            "404": {
-              "description": "product not found"
-            }
-          },
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "description": "ID produk",
-              "type": "integer"
-            },
-            {
-              "name": "req body",
-              "in": "body",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/form_product"
-              }
-            }
-          ],
-          "security": [
-            {
-              "Bearer": []
-            }
-          ]
-        },
-        "delete": {
-          "tags": [
-            "Products"
-          ],
-          "summary": "Menghapus produk",
-          "produces": [
-            "application/json"
-          ],
-          "responses": {
-            "200": {
-              "description": "successful operation"
-            },
-            "400": {
-              "description": "bad request"
-            },
-            "404": {
-              "description": "product not found"
-            }
-          },
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "description": "ID produk",
-              "type": "integer"
-            }
-          ],
-          "security": [
-            {
-              "Bearer": []
-            }
-          ]
-        }
-      }
-    },
-    "definitions": {
-      "form_product": {
-        "type": "object",
-        "properties": {
-          "product_name": {
-            "type": "string"
-          },
-          "category_id": {
-            "type": "integer"
-          },
-          "price": {
-            "type": "integer"
-          },
-          "quantity": {
-            "type": "integer"
-          },
-          "description": {
-            "type": "string"
+          "400": {
+            "description": "bad request"
           }
-        }
-      },
-      "form_category": {
-        "type": "object",
-        "properties": {
-          "category_name": {
-            "type": "string"
+        },
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "email",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "required": true
           }
+        ]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login user",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        },
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/auth/reGenToken": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Re Generate user token",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        },
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Logout user",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        },
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "username",
+            "type": "string",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "type": "string",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/categories": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Menampilkan semua kategori",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "category not found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Tambah kategori",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "bad request"
+          }
+        },
+        "parameters": [
+          {
+            "name": "req body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/form_category"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/categories/{id}": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Menampilkan detail kategori",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "category not found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID kategori",
+            "type": "integer"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Memperbarui kategori",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "category not found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID kategori",
+            "type": "integer"
+          },
+          {
+            "name": "req body",
+            "in": "body",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Menghapus kategori",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "category not found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID kategori",
+            "type": "integer"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Menampilkan semua produk",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "404": {
+            "description": "product not found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Tambah produk",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "product not found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "req body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/form_product"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Menampilkan detail produk",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "product not found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID produk",
+            "type": "integer"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Memperbarui produk",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "product not found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID produk",
+            "type": "integer"
+          },
+          {
+            "name": "req body",
+            "in": "body",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Menghapus produk",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "bad request"
+          },
+          "404": {
+            "description": "product not found"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID produk",
+            "type": "integer"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "form_product": {
+      "type": "object",
+      "properties": {
+        "product_name": {
+          "type": "string"
+        },
+        "category_id": {
+          "type": "integer"
+        },
+        "price": {
+          "type": "integer"
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "form_category": {
+      "type": "object",
+      "properties": {
+        "category_name": {
+          "type": "string"
         }
       }
     }
   }
+}
