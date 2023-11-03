@@ -51,7 +51,7 @@ class Ingredients extends REST_Controller
         }
 
         if ($data['status'] == false) {
-            $this->response(['status'=> false, 'message' => 'Produk belum memiliki bahan.'], 404);
+            $this->response(['status'=> false, 'message' => 'Produk belum memiliki bahan.'], 200);
         } else {
             $this->response(['status'=> true, 'message' => 'Menampilkan data produk', 'data' => $data['data']], 200);
         }
