@@ -73,3 +73,13 @@ $route['api/v1/products'] = 'api/Product';
 $route['api/v1/products/(:any)'] = 'api/Product/$1';
 $route['api/v1/products/(:num)']['PUT'] = 'api/Product/$1';
 $route['api/v1/products/(:num)']['DELETE'] = 'api/Product/$1';
+
+// V2
+// Product
+$route['api/v2/products'] = 'api2/Product';
+$route['api/v2/products/(:any)'] = 'api2/Product/$1';
+$route['api/v2/products/(:num)']['PUT'] = 'api2/Product/$1';
+$route['api/v2/products/(:num)']['DELETE'] = 'api2/Product/$1';
+
+// Ingredients
+$route['api/v2/ingredients'] = 'api2/Ingredients';
