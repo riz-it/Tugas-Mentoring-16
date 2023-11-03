@@ -32,6 +32,8 @@ class Ingredients extends REST_Controller
     {
         parent::__construct();
         $this->load->model('Ingredients_model');
+        Header('Access-Control-Allow-Origin: *'); 
+        Header('Access-Control-Allow-Headers: *');
     }
 
     /**
@@ -41,7 +43,6 @@ class Ingredients extends REST_Controller
      */
     public function index_get($id = null)
     {
-        
 
         if (!empty($id)) {
             $data = $this->Ingredients_model->show($id);
@@ -50,7 +51,7 @@ class Ingredients extends REST_Controller
         }
 
         if ($data['status'] == false) {
-            $this->response(['status'=> false, 'message' => 'Data tidak ditemukan.'], 404);
+            $this->response(['status'=> false, 'message' => 'Produk belum memiliki bahan.'], 404);
         } else {
             $this->response(['status'=> true, 'message' => 'Menampilkan data produk', 'data' => $data['data']], 200);
         }
@@ -70,6 +71,7 @@ class Ingredients extends REST_Controller
         foreach($input['data'] as $key => $value) {
             $input['data'][$key]['product_id'] = $input['product_id'];
         }
+
 
         $exec = $this->Ingredients_model->insertUpdate($input, $input['product_id']);
         if ($exec['status'] == false) {

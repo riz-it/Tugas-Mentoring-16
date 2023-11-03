@@ -83,3 +83,4 @@ $route['api/v2/products/(:num)']['DELETE'] = 'api2/Product/$1';
 
 // Ingredients
 $route['api/v2/ingredients'] = 'api2/Ingredients';
+$route['api/v2/ingredients/(:any)'] = 'api2/Ingredients/$1';

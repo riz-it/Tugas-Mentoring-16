@@ -32,6 +32,8 @@ class Product extends REST_Controller
     {
         parent::__construct();
         $this->load->model('Product_model');
+        Header('Access-Control-Allow-Origin: *');
+        Header('Access-Control-Allow-Headers: *');
     }
 
     /**

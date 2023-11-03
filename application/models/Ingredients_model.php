@@ -24,7 +24,7 @@ class Ingredients_model extends CI_Model
         if (!empty($id)) {
             $cek = $this->db->get_where($this->table, ['product_id' => $id])->num_rows();
             if ($cek > 0) {
-                $data = $this->db->get_where($this->table, ['product_id' => $id])->row_array();
+                $data = $this->db->get_where($this->table, ['product_id' => $id])->result_array();
                 $query = [
                     'status' => true,
                     'data' => $data
