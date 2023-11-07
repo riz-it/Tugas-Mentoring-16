@@ -32,8 +32,9 @@ class Ingredients extends REST_Controller
     {
         parent::__construct();
         $this->load->model('Ingredients_model');
-        Header('Access-Control-Allow-Origin: *'); 
+        Header('Access-Control-Allow-Origin: *');
         Header('Access-Control-Allow-Headers: *');
+        Header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
     }
 
     /**

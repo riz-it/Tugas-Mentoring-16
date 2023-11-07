@@ -34,6 +34,7 @@ class Product extends REST_Controller
         $this->load->model('Product_model');
         Header('Access-Control-Allow-Origin: *');
         Header('Access-Control-Allow-Headers: *');
+        Header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
     }
 
     /**
